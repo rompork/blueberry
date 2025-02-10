@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Blueberry</class>
+ <widget class="QMainWindow" name="Blueberry">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>764</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>30</width>
+    <height>20</height>
+   </size>
+  </property>
+  <property name="font">
+   <font>
+    <italic>false</italic>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>Blueberry</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="res.qrc">
+    <normaloff>:/newPrefix/blueberryImageCropped.png</normaloff>:/newPrefix/blueberryImageCropped.png</iconset>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: #000000;
+border: 1px solid #000000;
+border-radius: 4px;
+color: #0000FF;</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QToolButton" name="files">
+        <property name="minimumSize">
+         <size>
+          <width>30</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>15</pointsize>
+          <italic>false</italic>
+         </font>
+        </property>
+        <property name="autoFillBackground">
+         <bool>false</bool>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: #00008B;
+border: 1px solid #000000;
+border-radius: 4px;
+color: #1E90FF;</string>
+        </property>
+        <property name="text">
+         <string>Files</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QToolButton" name="playlists">
+        <property name="minimumSize">
+         <size>
+          <width>40</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: #00008B;
+border: 1px solid #000000;
+border-radius: 4px;
+color: #1E90FF;</string>
+        </property>
+        <property name="text">
+         <string>Playlists</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="arrow_left">
+        <property name="minimumSize">
+         <size>
+          <width>30</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: #00008B;
+border: 1px solid #000000;
+border-radius: 4px;
+color: #1E90FF;</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>arrow_left2.png</normaloff>arrow_left2.png</iconset>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="play">
+        <property name="minimumSize">
+         <size>
+          <width>30</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: #00008B;
+border: 1px solid #000000;
+border-radius: 4px;
+color: #1E90FF;</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>play.png</normaloff>play.png</iconset>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="arrow_right">
+        <property name="minimumSize">
+         <size>
+          <width>30</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: #00008B;
+border: 1px solid #000000;
+border-radius: 4px;
+color: #1E90FF;</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>arrow_right2.png</normaloff>arrow_right2.png</iconset>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="stop">
+        <property name="minimumSize">
+         <size>
+          <width>30</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: #00008B;
+border: 1px solid #000000;
+border-radius: 4px;
+color: #1E90FF;</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>box2.png</normaloff>box2.png</iconset>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSlider" name="Slider">
+        <property name="styleSheet">
+         <string notr="true">background-color: #00008B;
+border: 1px solid #000000;
+border-radius: 4px;
+color: #1E90FF;</string>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_0">
+        <property name="font">
+         <font>
+          <pointsize>8</pointsize>
+          <italic>false</italic>
+          <bold>true</bold>
+          <underline>false</underline>
+         </font>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_100">
+        <property name="font">
+         <font>
+          <pointsize>8</pointsize>
+          <italic>false</italic>
+          <bold>true</bold>
+          <underline>false</underline>
+         </font>
+        </property>
+        <property name="text">
+         <string>100</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QScrollArea" name="scrollArea">
+      <property name="minimumSize">
+       <size>
+        <width>100</width>
+        <height>300</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>1000</width>
+        <height>400</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: #00008B;
+border: 1px solid #000000;
+border-radius: 4px;
+color: #1E90FF;</string>
+      </property>
+      <property name="widgetResizable">
+       <bool>true</bool>
+      </property>
+      <widget class="QWidget" name="music_list">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>744</width>
+         <height>398</height>
+        </rect>
+       </property>
+      </widget>
+     </widget>
+    </item>
+    <item>
+     <widget class="QWidget" name="widget" native="true">
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="0" column="0">
+        <widget class="QPushButton" name="shuffle">
+         <property name="maximumSize">
+          <size>
+           <width>100</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: #00008B;
+border: 1px solid #000000;
+border-radius: 4px;
+color: #1E90FF;</string>
+         </property>
+         <property name="text">
+          <string>Shuffle</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>shuffle.png</normaloff>shuffle.png</iconset>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1" rowspan="2">
+        <widget class="QProgressBar" name="progressBar">
+         <property name="minimumSize">
+          <size>
+           <width>100</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>400</width>
+           <height>100</height>
+          </size>
+         </property>
+         <property name="layoutDirection">
+          <enum>Qt::LeftToRight</enum>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: #00008B;
+border: 1px solid #000000;
+border-radius: 4px;
+color: #1E90FF;</string>
+         </property>
+         <property name="value">
+          <number>24</number>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2" rowspan="2">
+        <widget class="QLCDNumber" name="lcdNumber">
+         <property name="minimumSize">
+          <size>
+           <width>30</width>
+           <height>20</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QPushButton" name="repeat">
+         <property name="maximumSize">
+          <size>
+           <width>100</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: #00008B;
+border: 1px solid #000000;
+border-radius: 4px;
+color: #1E90FF;</string>
+         </property>
+         <property name="text">
+          <string>Repeat</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>repeat.png</normaloff>repeat.png</iconset>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>764</width>
+     <height>22</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources>
+  <include location="res.qrc"/>
+ </resources>
+ <connections/>
+</ui>

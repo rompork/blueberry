@@ -1,0 +1,7 @@
+<RCC>
+  <qresource prefix="newPrefix">
+    <file>less3.png</file>
+    <file>more.png</file>
+    <file>blueberryImageCropped.png</file>
+  </qresource>
+</RCC>
