@@ -1,5 +1,6 @@
 import os
 import sys
+from PyQt6 import QtWidgets
 from PyQt6.QtWidgets import (
     QApplication, QWidget, QFileDialog,
     QLabel, QPushButton, QListWidget, QHBoxLayout, QVBoxLayout)
@@ -18,6 +19,7 @@ playlist = []
 current_song = ""
 is_paused = False
 
+app = QtWidgets.QApplication(sys.argv)
 class Widget(QWidget):
     def __init__(self):
         super().__init__()
@@ -65,8 +67,13 @@ class Widget(QWidget):
     def Progression(self):
         pass
 
-    
-app = QApplication([])
+Blueberry = QtWidgets.QMainWindow()
+Blueberry.setWindowTitle("Blueberry")
 ex = QWidget()
 ex.show()
 app.exec()
+ui = Ui_Blueberry()
+ui.setupUi(Blueberry)
+Blueberry.show()
+sys.exit(app.exec())
+

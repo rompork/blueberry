@@ -209,8 +209,8 @@ class Ui_Blueberry(object):
         self.arrow_right.setText(_translate("Blueberry", ""))
         self.play.setText(_translate("Blueberry", ""))
         self.stop.setText(_translate("Blueberry", ""))
-        self.music_list.setText(_translate("Blueberry", ""))
-        self.progressBar.setText(_translate("Blueberry", ""))
+
+
 
 if __name__ == "__main__":
     import sys
