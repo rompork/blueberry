@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>764</width>
-    <height>600</height>
+    <height>336</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -25,7 +25,7 @@
    <string>Blueberry</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="res.qrc">
+   <iconset>
     <normaloff>:/newPrefix/blueberryImageCropped.png</normaloff>:/newPrefix/blueberryImageCropped.png</iconset>
   </property>
   <property name="styleSheet">
@@ -88,7 +88,7 @@ color: #1E90FF;</string>
       <item>
        <spacer name="horizontalSpacer">
         <property name="orientation">
-         <enum>Qt::Horizontal</enum>
+         <enum>Qt::Orientation::Horizontal</enum>
         </property>
         <property name="sizeHint" stdset="0">
          <size>
@@ -199,7 +199,7 @@ border-radius: 4px;
 color: #1E90FF;</string>
         </property>
         <property name="orientation">
-         <enum>Qt::Horizontal</enum>
+         <enum>Qt::Orientation::Horizontal</enum>
         </property>
        </widget>
       </item>
@@ -236,105 +236,9 @@ color: #1E90FF;</string>
      </layout>
     </item>
     <item>
-     <widget class="QScrollArea" name="scrollArea">
-      <property name="minimumSize">
-       <size>
-        <width>100</width>
-        <height>300</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>1000</width>
-        <height>400</height>
-       </size>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">background-color: #00008B;
-border: 1px solid #000000;
-border-radius: 4px;
-color: #1E90FF;</string>
-      </property>
-      <property name="widgetResizable">
-       <bool>true</bool>
-      </property>
-      <widget class="QWidget" name="music_list">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>0</y>
-         <width>744</width>
-         <height>398</height>
-        </rect>
-       </property>
-      </widget>
-     </widget>
-    </item>
-    <item>
      <widget class="QWidget" name="widget" native="true">
-      <layout class="QGridLayout" name="gridLayout">
-       <item row="0" column="0">
-        <widget class="QPushButton" name="shuffle">
-         <property name="maximumSize">
-          <size>
-           <width>100</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">background-color: #00008B;
-border: 1px solid #000000;
-border-radius: 4px;
-color: #1E90FF;</string>
-         </property>
-         <property name="text">
-          <string>Shuffle</string>
-         </property>
-         <property name="icon">
-          <iconset>
-           <normaloff>shuffle.png</normaloff>shuffle.png</iconset>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="1" rowspan="2">
-        <widget class="QProgressBar" name="progressBar">
-         <property name="minimumSize">
-          <size>
-           <width>100</width>
-           <height>50</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>400</width>
-           <height>100</height>
-          </size>
-         </property>
-         <property name="layoutDirection">
-          <enum>Qt::LeftToRight</enum>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">background-color: #00008B;
-border: 1px solid #000000;
-border-radius: 4px;
-color: #1E90FF;</string>
-         </property>
-         <property name="value">
-          <number>24</number>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="2" rowspan="2">
-        <widget class="QLCDNumber" name="lcdNumber">
-         <property name="minimumSize">
-          <size>
-           <width>30</width>
-           <height>20</height>
-          </size>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0">
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
         <widget class="QPushButton" name="repeat">
          <property name="maximumSize">
           <size>
@@ -354,6 +258,38 @@ color: #1E90FF;</string>
          <property name="icon">
           <iconset>
            <normaloff>repeat.png</normaloff>repeat.png</iconset>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QProgressBar" name="progressBar">
+         <property name="minimumSize">
+          <size>
+           <width>100</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="layoutDirection">
+          <enum>Qt::LayoutDirection::LeftToRight</enum>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: #00008B;
+border: 1px solid #000000;
+border-radius: 4px;
+color: #1E90FF;</string>
+         </property>
+         <property name="value">
+          <number>24</number>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLCDNumber" name="lcdNumber">
+         <property name="minimumSize">
+          <size>
+           <width>30</width>
+           <height>20</height>
+          </size>
          </property>
         </widget>
        </item>
