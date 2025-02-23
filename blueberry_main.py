@@ -7,40 +7,39 @@ from PyQt6.QtWidgets import (
 from PyQt6.QtCore import QtMsgType
 from PyQt6.QtGui import QPixmap
 from PySide6.QtCore import QUrl, QTime
-from PySide6.QtMultimedia import QMediaPlayer, QAudioOutput
+from PySide6.QtMultimedia import QMediaPlayer, QAudioOutput, QAudio
 
-import pygame
 from random import randint
 import time
-from blueberry_ui2 import *
-pygame.init()
-pygame.mixer.init()
+from blueberry_ui import *
+
 
 playlist = []
 current_song = ""
 is_paused = False
 
-app = QApplication(sys.argv)
+
 class Widget(QMainWindow):
     def __init__(self):
         super().__init__()
         self.ui = Ui_Blueberry()
         self.ui.setupUi(self)
         self.setWindowTitle('Blueberry')
-        self.dir = ''
+        self.file = ''
+
+        self.player = QMediaPlayer
+        self.audio = QAudioOutput
 
         self.ui.files.clicked.connect(self.OpenFiles)
-        self.ui.playlists.triggered.connect(self.Playlists)
-        self.ui.Silder.sliderMoved.connect(self.ChangeVolume)
+        self.ui.Slider.sliderMoved.connect(self.ChangeVolume)
         self.ui.stop.clicked.connect(self.Stop)
         self.ui.play.clicked.connect(self.Play)
         self.ui.repeat.clicked.connect(self.Repeat)
         self.ui.arrow_right.clicked.connect(self.Next)
         self.ui.arrow_left.clicked.connect(self.Previous)
-        self.ui.progressBar.clicked.connect(self.Progression)
+        #self.ui.progressBar.positionChanged.connect(self.Progression)
 
-        self.player = QMediaPlayer
-        self.audio = QAudioOutput
+
 
     def filter(self, files, extensions):
         result = []
@@ -49,35 +48,35 @@ class Widget(QMainWindow):
                 if filename.endswith(ext):
                     result.append(filename)
         return result
-    def choosedir(self):
-        self.dir = QFileDialog.getExistingDirectory()
+    def choosefile(self):
+        print("choosedir")
+        self.file = QFileDialog.getOpenFileName(self)
     def OpenFiles(self): 
-        self.choosedir()
+        print("openfiles")
+        self.choosefile()
         extensions = ['.mp3', '.aac', '.wav', '.flac']
-        if self.dir:
-            filenames = self.filter(os.listdir(self.dir), extensions)
-    def Playlists(self):
-        pass
+        if self.file:
+           filenames = self.filter(self.file, extensions)
     def ChangeVolume(self):
-        pass
+        print("changed the volume")
     def Play(self):
-        pygame.mixer.music.load()
-        pygame.mixer.music.play()
+        print("play")
+        #pygame.mixer.music.load(self.file)
+        #pygame.mixer.music.play(self.file)
     def Previous(self):
-        pass
+        print("arrow left")
     def Next(self):
-        pass
+        print("arrow right")
     def Stop(self):
-        pygame.mixer.music.pause()
+        print("stop")
+        self.player.stop()
     def Repeat(self):
-        pass
+        print("repeat")
     def Progression(self):
-        pass
+        print("progress")
 
-Blueberry = QtWidgets.QMainWindow()
-Blueberry.setWindowTitle("Blueberry")
-ui = Ui_Blueberry()
-ui.setupUi(Blueberry)
-Blueberry.show()
-sys.exit(app.exec())
 
+app = QApplication([])
+ex = Widget()
+ex.show()
+app.exec()
