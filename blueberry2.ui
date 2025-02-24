@@ -6,9 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>764</width>
-    <height>336</height>
+    <width>754</width>
+    <height>504</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="minimumSize">
    <size>
@@ -35,8 +41,8 @@ border-radius: 4px;
 color: #0000FF;</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout">
-    <item>
+   <layout class="QFormLayout" name="formLayout">
+    <item row="0" column="0" colspan="2">
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
        <widget class="QToolButton" name="files">
@@ -67,11 +73,23 @@ color: #1E90FF;</string>
        </widget>
       </item>
       <item>
-       <widget class="QToolButton" name="playlists">
+       <widget class="QPushButton" name="playlists">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="minimumSize">
          <size>
-          <width>40</width>
+          <width>30</width>
           <height>40</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>50</height>
          </size>
         </property>
         <property name="styleSheet">
@@ -145,6 +163,29 @@ color: #1E90FF;</string>
        </widget>
       </item>
       <item>
+       <widget class="QPushButton" name="pause">
+        <property name="minimumSize">
+         <size>
+          <width>30</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: #00008B;
+border: 1px solid #000000;
+border-radius: 4px;
+color: #1E90FF;</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>pause.png</normaloff>pause.png</iconset>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QPushButton" name="arrow_right">
         <property name="minimumSize">
          <size>
@@ -198,52 +239,161 @@ border: 1px solid #000000;
 border-radius: 4px;
 color: #1E90FF;</string>
         </property>
+        <property name="sliderPosition">
+         <number>70</number>
+        </property>
         <property name="orientation">
          <enum>Qt::Orientation::Horizontal</enum>
         </property>
        </widget>
       </item>
+     </layout>
+    </item>
+    <item row="1" column="0">
+     <widget class="QListWidget" name="listWidget">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>200</width>
+        <height>300</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>400</width>
+        <height>500</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: #00008B;
+border: 1px solid #000000;
+border-radius: 4px;
+color: #FFFFFF;</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <layout class="QVBoxLayout" name="verticalLayout">
       <item>
-       <widget class="QLabel" name="label_0">
-        <property name="font">
-         <font>
-          <pointsize>8</pointsize>
-          <italic>false</italic>
-          <bold>true</bold>
-          <underline>false</underline>
-         </font>
+       <widget class="QPushButton" name="repeat">
+        <property name="minimumSize">
+         <size>
+          <width>30</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: #00008B;
+border: 1px solid #000000;
+border-radius: 4px;
+color: #1E90FF;</string>
         </property>
         <property name="text">
-         <string>0</string>
+         <string>Repeat</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>repeat.png</normaloff>repeat.png</iconset>
+        </property>
+        <property name="checkable">
+         <bool>false</bool>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="label_100">
-        <property name="font">
-         <font>
-          <pointsize>8</pointsize>
-          <italic>false</italic>
-          <bold>true</bold>
-          <underline>false</underline>
-         </font>
+       <widget class="QPushButton" name="shuffle">
+        <property name="minimumSize">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: #00008B;
+border: 1px solid #000000;
+border-radius: 4px;
+color: #1E90FF;</string>
         </property>
         <property name="text">
-         <string>100</string>
+         <string>Shuffle</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>shuffle.png</normaloff>
+          <disabledoff>shuffle.png</disabledoff>shuffle.png</iconset>
         </property>
        </widget>
       </item>
      </layout>
     </item>
-    <item>
+    <item row="2" column="0" colspan="2">
+     <widget class="QLabel" name="label">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>250</width>
+        <height>50</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>1000000</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>40</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>TextLabel</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="0" colspan="2">
      <widget class="QWidget" name="widget" native="true">
       <layout class="QHBoxLayout" name="horizontalLayout_2">
        <item>
-        <widget class="QPushButton" name="repeat">
+        <widget class="QLabel" name="music_live_time">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>20</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="maximumSize">
           <size>
            <width>100</width>
-           <height>16777215</height>
+           <height>20</height>
           </size>
          </property>
          <property name="styleSheet">
@@ -253,24 +403,23 @@ border-radius: 4px;
 color: #1E90FF;</string>
          </property>
          <property name="text">
-          <string>Repeat</string>
-         </property>
-         <property name="icon">
-          <iconset>
-           <normaloff>repeat.png</normaloff>repeat.png</iconset>
+          <string>00:00</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QProgressBar" name="progressBar">
+        <widget class="QSlider" name="progressSlider">
          <property name="minimumSize">
           <size>
-           <width>100</width>
-           <height>50</height>
+           <width>500</width>
+           <height>20</height>
           </size>
          </property>
-         <property name="layoutDirection">
-          <enum>Qt::LayoutDirection::LeftToRight</enum>
+         <property name="maximumSize">
+          <size>
+           <width>600</width>
+           <height>30</height>
+          </size>
          </property>
          <property name="styleSheet">
           <string notr="true">background-color: #00008B;
@@ -278,18 +427,8 @@ border: 1px solid #000000;
 border-radius: 4px;
 color: #1E90FF;</string>
          </property>
-         <property name="value">
-          <number>24</number>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLCDNumber" name="lcdNumber">
-         <property name="minimumSize">
-          <size>
-           <width>30</width>
-           <height>20</height>
-          </size>
+         <property name="orientation">
+          <enum>Qt::Orientation::Horizontal</enum>
          </property>
         </widget>
        </item>
@@ -303,7 +442,7 @@ color: #1E90FF;</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>764</width>
+     <width>754</width>
      <height>22</height>
     </rect>
    </property>
