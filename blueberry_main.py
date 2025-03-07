@@ -9,6 +9,7 @@ from PyQt6.QtCore import QtMsgType, Qt, QTimer
 from PyQt6.QtGui import QPixmap, QIcon, QFont, QFontMetrics
 from PySide6.QtCore import QUrl, QTime
 from PySide6.QtMultimedia import QMediaPlayer, QAudioOutput, QAudio, QAudioFormat
+from plyer import notification
 
 from random import randint
 import time
@@ -29,7 +30,7 @@ class Widget(QMainWindow):
         self.repeat_m = False
         self.shuffle_m = False
         self.current_index = -1
-        self.audio_files = []  # Initialize the audio_files attribute
+        self.audio_files = []
 
         self.player = QMediaPlayer()
         self.audio = QAudioOutput()
@@ -56,14 +57,6 @@ class Widget(QMainWindow):
         self.ui.label.setText("No file selected")
         self.ui.music_live_time.setText("00:00 / 00:00")
 
-    def filter(self, files, extensions):
-        result = []
-        for filename in files:
-            for ext in extensions:
-                if filename.endswith(ext):
-                    result.append(filename)
-        return result
-
     def choosefile(self):
         print("choosefile")
         self.file, _ = QFileDialog.getOpenFileName(self, "open file", "", "Audio Files (*.mp3 *.aac *.wav *.flac)")
@@ -82,6 +75,7 @@ class Widget(QMainWindow):
             self.ui.label.setText(os.path.basename(self.file))
             self.adjustLabelFontSize(self.ui.label)
             self.Play()
+            self.sendNotification(os.path.basename(self.file))
 
     def OpenDirectory(self):
         print("opendirectory")
@@ -103,6 +97,7 @@ class Widget(QMainWindow):
                 self.ui.label.setText(os.path.basename(first_file)) 
                 self.adjustLabelFontSize(self.ui.label)
                 self.Play()
+                self.sendNotification(os.path.basename(first_file))
 
     def PlaySelectedFile(self, item):
         selected_file = os.path.join(self.dir, item.text())
@@ -112,6 +107,7 @@ class Widget(QMainWindow):
         self.ui.label.setText(item.text())
         self.adjustLabelFontSize(self.ui.label)
         self.Play()
+        self.sendNotification(item.text())
 
     def ChangeVolume(self):
         print("changed the volume")
@@ -153,6 +149,7 @@ class Widget(QMainWindow):
             self.ui.label.setText(os.path.basename(random_file))
             self.adjustLabelFontSize(self.ui.label)
             self.Play()
+            self.sendNotification(os.path.basename(random_file))
         else:
             print("No audio files to shuffle")
 
@@ -202,6 +199,7 @@ class Widget(QMainWindow):
             self.ui.label.setText(os.path.basename(next_file))
             self.adjustLabelFontSize(self.ui.label)
             self.Play()
+            self.sendNotification(os.path.basename(next_file))
         else:
             print("No next file available")
 
@@ -218,6 +216,7 @@ class Widget(QMainWindow):
             self.ui.label.setText(os.path.basename(prev_file))
             self.adjustLabelFontSize(self.ui.label)
             self.Play()
+            self.sendNotification(os.path.basename(prev_file))
         else:
             print("No previous file available")
 
@@ -233,6 +232,14 @@ class Widget(QMainWindow):
             text_width = font_metrics.horizontalAdvance(label.text())
 
         label.setFont(font)
+
+    def sendNotification(self, song_name):
+        notification.notify(
+            title='Now Playing',
+            message=song_name,
+            app_name='Blueberry',
+            timeout=5
+        )
 
 app = QApplication([])
 bl = Widget()
