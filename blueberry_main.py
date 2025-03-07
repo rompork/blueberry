@@ -12,12 +12,7 @@ from PySide6.QtMultimedia import QMediaPlayer, QAudioOutput, QAudio, QAudioForma
 from plyer import notification
 
 from random import randint
-import time
 from blueberry_ui import *
-
-current_song = ""
-is_paused = False
-
 
 class Widget(QMainWindow):
     def __init__(self):
