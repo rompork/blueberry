@@ -51,6 +51,14 @@ class Widget(QMainWindow):
         self.player.durationChanged.connect(self.updateSliderRange)
         self.ui.label.setText("No file selected")
         self.ui.music_live_time.setText("00:00 / 00:00")
+        
+    def filter(self, files, extensions):
+         result = []
+         for filename in files:
+             for ext in extensions:
+                 if filename.endswith(ext):
+                     result.append(filename)
+         return result
 
     def choosefile(self):
         print("choosefile")
