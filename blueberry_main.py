@@ -8,24 +8,27 @@ from PyQt6.QtWidgets import (
 from PyQt6.QtCore import QtMsgType, Qt, QTimer
 from PyQt6.QtGui import QPixmap, QIcon, QFont, QFontMetrics
 from PySide6.QtCore import QUrl, QTime
-from PySide6.QtMultimedia import QMediaPlayer, QAudioOutput, QAudio, QAudioFormat
+from PySide6.QtMultimedia import QMediaPlayer, QAudioOutput, QAudioFormat
 from plyer import notification
-
 from random import randint
-from blueberry_ui import *
 
+from blueberry_ui import *
+from themes import light_theme, dark_theme, blue_theme
 class Widget(QMainWindow):
     def __init__(self):
         super().__init__()
         self.ui = Ui_Blueberry()
         self.ui.setupUi(self)
         self.setWindowTitle('Blueberry')
+        self.setWindowIcon(QIcon("/home/rompork/Documents/python/blueberry/blueberry.png"))
+
         self.file = ''
         self.dir = ''
         self.repeat_m = False
         self.shuffle_m = False
         self.current_index = -1
         self.audio_files = []
+        self.current_theme = "dark blue"
 
         self.player = QMediaPlayer()
         self.audio = QAudioOutput()
@@ -45,20 +48,21 @@ class Widget(QMainWindow):
         self.ui.progressSlider.sliderReleased.connect(self.FinalizeMusicPosition)
         self.ui.listWidget.itemDoubleClicked.connect(self.PlaySelectedFile)
         self.ui.shuffle.clicked.connect(self.Shuffle)
+        self.ui.themes.clicked.connect(self.changeThemes)
 
         self.player.mediaStatusChanged.connect(self.handleMediaStatusChanged)
         self.player.positionChanged.connect(self.updateSliderPosition)
         self.player.durationChanged.connect(self.updateSliderRange)
         self.ui.label.setText("No file selected")
         self.ui.music_live_time.setText("00:00 / 00:00")
-        
+
     def filter(self, files, extensions):
-         result = []
-         for filename in files:
-             for ext in extensions:
-                 if filename.endswith(ext):
-                     result.append(filename)
-         return result
+        result = []
+        for filename in files:
+            for ext in extensions:
+                if filename.endswith(ext):
+                    result.append(filename)
+        return result
 
     def choosefile(self):
         print("choosefile")
@@ -243,7 +247,19 @@ class Widget(QMainWindow):
             app_name='Blueberry',
             timeout=5
         )
-
+    def changeThemes(self):
+        themes = ["Light", "Dark", "Blue"]
+        theme, ok = QtWidgets.QInputDialog.getItem(self, "Select Theme", "Available Themes:", themes, 0, False)
+        if ok:
+            if theme == "Light":
+                self.setStyleSheet(light_theme)
+                self.current_theme = "light"
+            elif theme == "Dark":
+                self.setStyleSheet(dark_theme)
+                self.current_theme = "dark"
+            elif theme == "Blue":
+                self.setStyleSheet(blue_theme)
+                self.current_theme = "blue"
 app = QApplication([])
 bl = Widget()
 bl.show()

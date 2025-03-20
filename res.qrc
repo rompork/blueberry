@@ -1,7 +1,12 @@
 <RCC>
   <qresource prefix="newPrefix">
-    <file>less3.png</file>
-    <file>more.png</file>
-    <file>blueberryImageCropped.png</file>
+    <file>arrow_left.png</file>
+    <file>arrow_right.png</file>
+    <file>blueberry.png</file>
+    <file>stop.png</file>
+    <file>repeat.png</file>
+    <file>shuffle.png</file>
+    <file>pause.png</file>
+    <file>play.png</file>
   </qresource>
 </RCC>

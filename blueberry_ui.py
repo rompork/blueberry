@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'blueberry2.ui'
+# Form implementation generated from reading ui file 'blueberry.ui'
 #
 # Created by: PyQt6 UI code generator 6.8.1
 #
@@ -23,7 +23,7 @@ class Ui_Blueberry(object):
         font.setItalic(False)
         Blueberry.setFont(font)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(":/newPrefix/blueberryImageCropped.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon.addPixmap(QtGui.QPixmap("blueberry.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         Blueberry.setWindowIcon(icon)
         Blueberry.setStyleSheet("background-color: #000000;\n"
 "border: 1px solid #000000;\n"
@@ -62,6 +62,14 @@ class Ui_Blueberry(object):
 "color: #1E90FF;")
         self.playlists.setObjectName("playlists")
         self.horizontalLayout.addWidget(self.playlists)
+        self.themes = QtWidgets.QToolButton(parent=self.centralwidget)
+        self.themes.setMinimumSize(QtCore.QSize(30, 40))
+        self.themes.setStyleSheet("background-color: #00008B;\n"
+"border: 1px solid #000000;\n"
+"border-radius: 4px;\n"
+"color: #1E90FF;")
+        self.themes.setObjectName("themes")
+        self.horizontalLayout.addWidget(self.themes)
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
         self.arrow_left = QtWidgets.QPushButton(parent=self.centralwidget)
@@ -120,7 +128,7 @@ class Ui_Blueberry(object):
 "color: #1E90FF;")
         self.stop.setText("")
         icon5 = QtGui.QIcon()
-        icon5.addPixmap(QtGui.QPixmap("box2.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon5.addPixmap(QtGui.QPixmap("stop.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.stop.setIcon(icon5)
         self.stop.setObjectName("stop")
         self.horizontalLayout.addWidget(self.stop)
@@ -201,7 +209,7 @@ class Ui_Blueberry(object):
         sizePolicy.setHeightForWidth(self.music_live_time.sizePolicy().hasHeightForWidth())
         self.music_live_time.setSizePolicy(sizePolicy)
         self.music_live_time.setMinimumSize(QtCore.QSize(20, 10))
-        self.music_live_time.setMaximumSize(QtCore.QSize(100, 20))
+        self.music_live_time.setMaximumSize(QtCore.QSize(90, 20))
         self.music_live_time.setStyleSheet("background-color: #00008B;\n"
 "border: 1px solid #000000;\n"
 "border-radius: 4px;\n"
@@ -236,6 +244,7 @@ class Ui_Blueberry(object):
         Blueberry.setWindowTitle(_translate("Blueberry", "Blueberry"))
         self.files.setText(_translate("Blueberry", "Files"))
         self.playlists.setText(_translate("Blueberry", "Playlists"))
+        self.themes.setText(_translate("Blueberry", "Themes"))
         self.repeat.setText(_translate("Blueberry", "Repeat"))
         self.shuffle.setText(_translate("Blueberry", "Shuffle"))
         self.label.setText(_translate("Blueberry", "TextLabel"))
