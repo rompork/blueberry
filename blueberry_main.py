@@ -13,7 +13,8 @@ from plyer import notification
 from random import randint
 
 from blueberry_ui import *
-from themes import light_theme, dark_theme, blue_theme
+from themes import light_theme, dark_theme, classic_theme, lavander_theme_dark, lavander_theme_light, orange_theme_dark, orange_theme_light, green_theme_dark, green_theme_light, red_theme_dark, red_theme_light, blue_theme_dark, blue_theme_light, cyan_theme_dark, cyan_theme_light, lime_theme_dark, lime_theme_light
+
 class Widget(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -28,7 +29,8 @@ class Widget(QMainWindow):
         self.shuffle_m = False
         self.current_index = -1
         self.audio_files = []
-        self.current_theme = "dark blue"
+        self.current_theme = classic_theme
+        self.setStyleSheet(self.current_theme)
 
         self.player = QMediaPlayer()
         self.audio = QAudioOutput()
@@ -229,6 +231,7 @@ class Widget(QMainWindow):
 
     def adjustLabelFontSize(self, label):
         font = label.font()
+        font.setPointSize(24)
         font_metrics = QFontMetrics(font)
         text_width = font_metrics.horizontalAdvance(label.text())
         label_width = label.width()
@@ -239,6 +242,10 @@ class Widget(QMainWindow):
             text_width = font_metrics.horizontalAdvance(label.text())
 
         label.setFont(font)
+        font_metrics = QFontMetrics(font)
+        text = label.text()
+        elided_text = font_metrics.elidedText(text, Qt.TextElideMode.ElideRight, label.width())
+        label.setText(elided_text)
 
     def sendNotification(self, song_name):
         notification.notify(
@@ -248,18 +255,44 @@ class Widget(QMainWindow):
             timeout=5
         )
     def changeThemes(self):
-        themes = ["Light", "Dark", "Blue"]
+        themes = ["Light", "Dark", "Classic", "Lavander", "Orange", "Green", "Red", "Blue", "Cyan", "Lime"]
         theme, ok = QtWidgets.QInputDialog.getItem(self, "Select Theme", "Available Themes:", themes, 0, False)
         if ok:
-            if theme == "Light":
-                self.setStyleSheet(light_theme)
-                self.current_theme = "light"
-            elif theme == "Dark":
-                self.setStyleSheet(dark_theme)
-                self.current_theme = "dark"
-            elif theme == "Blue":
-                self.setStyleSheet(blue_theme)
-                self.current_theme = "blue"
+            if theme in ["Light", "Dark", "Classic"]:
+                if theme == "Light":
+                    self.setStyleSheet(light_theme)
+                    self.current_theme = "light"
+                elif theme == "Dark":
+                    self.setStyleSheet(dark_theme)
+                    self.current_theme = "dark"
+                elif theme == "Classic":
+                    self.setStyleSheet(classic_theme)
+                    self.current_theme = "classic"
+            else:
+                mode, ok_mode = QtWidgets.QInputDialog.getItem(
+                    self, "Select Mode", "Choose Mode:", ["Light", "Dark"], 0, False)
+                if ok_mode:
+                    if theme == "Lavander":
+                        self.setStyleSheet(lavander_theme_light if mode == "Light" else lavander_theme_dark)
+                        self.current_theme = "lavander"
+                    elif theme == "Orange":
+                        self.setStyleSheet(orange_theme_light if mode == "Light" else orange_theme_dark)
+                        self.current_theme = "orange"
+                    elif theme == "Green":
+                        self.setStyleSheet(green_theme_light if mode == "Light" else green_theme_dark)
+                        self.current_theme = "green"
+                    elif theme == "Blue":
+                        self.setStyleSheet(blue_theme_light if mode == "Light" else blue_theme_dark)
+                        self.current_theme = "blue"
+                    elif theme == "Red":
+                        self.setStyleSheet(red_theme_light if mode == "Light" else red_theme_dark)
+                        self.current_theme = "red"
+                    elif theme == "Cyan":
+                        self.setStyleSheet(cyan_theme_light if mode == "Light" else cyan_theme_dark)
+                        self.current_theme = "cyan"
+                    elif theme == "Lime":
+                        self.setStyleSheet(lime_theme_light if mode == "Light" else lime_theme_dark)
+                        self.current_theme = "lime"
 app = QApplication([])
 bl = Widget()
 bl.show()

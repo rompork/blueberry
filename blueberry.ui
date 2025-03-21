@@ -284,8 +284,8 @@ color: #1E90FF;</string>
       </property>
       <property name="maximumSize">
        <size>
-        <width>400</width>
-        <height>500</height>
+        <width>600</width>
+        <height>700</height>
        </size>
       </property>
       <property name="styleSheet">
@@ -302,8 +302,8 @@ color: #FFFFFF;</string>
        <widget class="QPushButton" name="repeat">
         <property name="minimumSize">
          <size>
-          <width>30</width>
-          <height>20</height>
+          <width>40</width>
+          <height>30</height>
          </size>
         </property>
         <property name="maximumSize">
@@ -335,7 +335,7 @@ color: #1E90FF;</string>
         <property name="minimumSize">
          <size>
           <width>40</width>
-          <height>20</height>
+          <height>30</height>
          </size>
         </property>
         <property name="maximumSize">
@@ -359,6 +359,22 @@ color: #1E90FF;</string>
         </property>
        </widget>
       </item>
+      <item alignment="Qt::AlignmentFlag::AlignRight">
+       <widget class="QGraphicsView" name="graphicsView">
+        <property name="minimumSize">
+         <size>
+          <width>200</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>300</width>
+          <height>300</height>
+         </size>
+        </property>
+       </widget>
+      </item>
      </layout>
     </item>
     <item row="2" column="0" colspan="2">
@@ -377,8 +393,8 @@ color: #1E90FF;</string>
       </property>
       <property name="maximumSize">
        <size>
-        <width>1000000</width>
-        <height>16777215</height>
+        <width>720</width>
+        <height>30</height>
        </size>
       </property>
       <property name="font">
