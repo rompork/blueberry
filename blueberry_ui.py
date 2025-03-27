@@ -22,13 +22,13 @@ class Ui_Blueberry(object):
         font = QtGui.QFont()
         font.setItalic(False)
         Blueberry.setFont(font)
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("blueberry.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon = QtGui.QIcon("arrow_right.png")
+        icon.addPixmap(QtGui.QPixmap(":/newPrefix/arrow_right.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         Blueberry.setWindowIcon(icon)
-        Blueberry.setStyleSheet("background-color: #000000;\n"
-"border: 1px solid #000000;\n"
-"border-radius: 4px;\n"
-"color: #0000FF;")
+#        Blueberry.setStyleSheet("background-color: #000000;\n"
+#"border: 1px solid #000000;\n"
+#"border-radius: 4px;\n"
+#"color: #0000FF;")
         self.centralwidget = QtWidgets.QWidget(parent=Blueberry)
         self.centralwidget.setObjectName("centralwidget")
         self.formLayout = QtWidgets.QFormLayout(self.centralwidget)
@@ -56,7 +56,7 @@ class Ui_Blueberry(object):
         self.playlists.setSizePolicy(sizePolicy)
         self.playlists.setMinimumSize(QtCore.QSize(30, 40))
         self.playlists.setMaximumSize(QtCore.QSize(100, 50))
- #       self.playlists.setStyleSheet("background-color: #00008B;\n"
+#        self.playlists.setStyleSheet("background-color: #00008B;\n"
 #"border: 1px solid #000000;\n"
 #"border-radius: 4px;\n"
 #"color: #1E90FF;")
@@ -74,25 +74,25 @@ class Ui_Blueberry(object):
         self.horizontalLayout.addItem(spacerItem)
         self.arrow_left = QtWidgets.QPushButton(parent=self.centralwidget)
         self.arrow_left.setMinimumSize(QtCore.QSize(30, 30))
- #       self.arrow_left.setStyleSheet("background-color: #00008B;\n"
+#        self.arrow_left.setStyleSheet("background-color: #00008B;\n"
 #"border: 1px solid #000000;\n"
 #"border-radius: 4px;\n"
 #"color: #1E90FF;")
         self.arrow_left.setText("")
-        icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("arrow_left.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon1 = QtGui.QIcon("arrow_left.png")
+        icon1.addPixmap(QtGui.QPixmap(":/newPrefix/arrow_left.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.arrow_left.setIcon(icon1)
         self.arrow_left.setObjectName("arrow_left")
         self.horizontalLayout.addWidget(self.arrow_left)
         self.play = QtWidgets.QPushButton(parent=self.centralwidget)
         self.play.setMinimumSize(QtCore.QSize(30, 30))
- #       self.play.setStyleSheet("background-color: #00008B;\n"
+#        self.play.setStyleSheet("background-color: #00008B;\n"
 #"border: 1px solid #000000;\n"
 #"border-radius: 4px;\n"
 #"color: #1E90FF;")
         self.play.setText("")
-        icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap("play.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon2 = QtGui.QIcon("play.png")
+        icon2.addPixmap(QtGui.QPixmap(":/newPrefix/play.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.play.setIcon(icon2)
         self.play.setObjectName("play")
         self.horizontalLayout.addWidget(self.play)
@@ -103,8 +103,8 @@ class Ui_Blueberry(object):
 #"border-radius: 4px;\n"
 #"color: #1E90FF;")
         self.pause.setText("")
-        icon3 = QtGui.QIcon()
-        icon3.addPixmap(QtGui.QPixmap("pause.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon3 = QtGui.QIcon("pause.png")
+        icon3.addPixmap(QtGui.QPixmap(":/newPrefix/pause.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.pause.setIcon(icon3)
         self.pause.setObjectName("pause")
         self.horizontalLayout.addWidget(self.pause)
@@ -115,9 +115,7 @@ class Ui_Blueberry(object):
 #"border-radius: 4px;\n"
 #"color: #1E90FF;")
         self.arrow_right.setText("")
-        icon4 = QtGui.QIcon()
-        icon4.addPixmap(QtGui.QPixmap("arrow_right.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.arrow_right.setIcon(icon4)
+        self.arrow_right.setIcon(icon)
         self.arrow_right.setObjectName("arrow_right")
         self.horizontalLayout.addWidget(self.arrow_right)
         self.stop = QtWidgets.QPushButton(parent=self.centralwidget)
@@ -127,9 +125,9 @@ class Ui_Blueberry(object):
 #"border-radius: 4px;\n"
 #"color: #1E90FF;")
         self.stop.setText("")
-        icon5 = QtGui.QIcon()
-        icon5.addPixmap(QtGui.QPixmap("stop.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.stop.setIcon(icon5)
+        icon4 = QtGui.QIcon("stop.png")
+        icon4.addPixmap(QtGui.QPixmap(":/newPrefix/stop.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.stop.setIcon(icon4)
         self.stop.setObjectName("stop")
         self.horizontalLayout.addWidget(self.stop)
         self.Slider = QtWidgets.QSlider(parent=self.centralwidget)
@@ -149,7 +147,7 @@ class Ui_Blueberry(object):
         sizePolicy.setHeightForWidth(self.listWidget.sizePolicy().hasHeightForWidth())
         self.listWidget.setSizePolicy(sizePolicy)
         self.listWidget.setMinimumSize(QtCore.QSize(200, 300))
-        self.listWidget.setMaximumSize(QtCore.QSize(400, 500))
+        self.listWidget.setMaximumSize(QtCore.QSize(600, 700))
 #        self.listWidget.setStyleSheet("background-color: #00008B;\n"
 #"border: 1px solid #000000;\n"
 #"border-radius: 4px;\n"
@@ -159,31 +157,36 @@ class Ui_Blueberry(object):
         self.verticalLayout = QtWidgets.QVBoxLayout()
         self.verticalLayout.setObjectName("verticalLayout")
         self.repeat = QtWidgets.QPushButton(parent=self.centralwidget)
-        self.repeat.setMinimumSize(QtCore.QSize(30, 20))
+        self.repeat.setMinimumSize(QtCore.QSize(40, 30))
         self.repeat.setMaximumSize(QtCore.QSize(100, 20))
 #        self.repeat.setStyleSheet("background-color: #00008B;\n"
 #"border: 1px solid #000000;\n"
 #"border-radius: 4px;\n"
 #"color: #1E90FF;")
-        icon6 = QtGui.QIcon()
-        icon6.addPixmap(QtGui.QPixmap("repeat.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.repeat.setIcon(icon6)
+        icon5 = QtGui.QIcon("repeat.png")
+        icon5.addPixmap(QtGui.QPixmap(":/newPrefix/repeat.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.repeat.setIcon(icon5)
         self.repeat.setCheckable(False)
         self.repeat.setObjectName("repeat")
         self.verticalLayout.addWidget(self.repeat)
         self.shuffle = QtWidgets.QPushButton(parent=self.centralwidget)
-        self.shuffle.setMinimumSize(QtCore.QSize(40, 20))
+        self.shuffle.setMinimumSize(QtCore.QSize(40, 30))
         self.shuffle.setMaximumSize(QtCore.QSize(100, 20))
 #        self.shuffle.setStyleSheet("background-color: #00008B;\n"
 #"border: 1px solid #000000;\n"
 #"border-radius: 4px;\n"
 #"color: #1E90FF;")
-        icon7 = QtGui.QIcon()
-        icon7.addPixmap(QtGui.QPixmap("shuffle.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        icon7.addPixmap(QtGui.QPixmap("shuffle.png"), QtGui.QIcon.Mode.Disabled, QtGui.QIcon.State.Off)
-        self.shuffle.setIcon(icon7)
+        icon6 = QtGui.QIcon("shuffle.png")
+        icon6.addPixmap(QtGui.QPixmap(":/newPrefix/shuffle.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.shuffle.setIcon(icon6)
         self.shuffle.setObjectName("shuffle")
         self.verticalLayout.addWidget(self.shuffle)
+        self.graphicsView = QtWidgets.QGraphicsView(parent=self.centralwidget)
+        self.graphicsView.setMinimumSize(QtCore.QSize(200, 200))
+        self.graphicsView.setMaximumSize(QtCore.QSize(200, 200))
+        self.graphicsView.setAlignment(QtCore.Qt.AlignmentFlag.AlignBottom|QtCore.Qt.AlignmentFlag.AlignRight|QtCore.Qt.AlignmentFlag.AlignTrailing)
+        self.graphicsView.setObjectName("graphicsView")
+        self.verticalLayout.addWidget(self.graphicsView, 0, QtCore.Qt.AlignmentFlag.AlignRight)
         self.formLayout.setLayout(1, QtWidgets.QFormLayout.ItemRole.FieldRole, self.verticalLayout)
         self.label = QtWidgets.QLabel(parent=self.centralwidget)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Fixed)
@@ -192,7 +195,7 @@ class Ui_Blueberry(object):
         sizePolicy.setHeightForWidth(self.label.sizePolicy().hasHeightForWidth())
         self.label.setSizePolicy(sizePolicy)
         self.label.setMinimumSize(QtCore.QSize(250, 50))
-        self.label.setMaximumSize(QtCore.QSize(1000000, 16777215))
+        self.label.setMaximumSize(QtCore.QSize(720, 30))
         font = QtGui.QFont()
         font.setPointSize(40)
         self.label.setFont(font)
@@ -249,13 +252,3 @@ class Ui_Blueberry(object):
         self.shuffle.setText(_translate("Blueberry", "Shuffle"))
         self.label.setText(_translate("Blueberry", "TextLabel"))
         self.music_live_time.setText(_translate("Blueberry", "00:00"))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    Blueberry = QtWidgets.QMainWindow()
-    ui = Ui_Blueberry()
-    ui.setupUi(Blueberry)
-    Blueberry.show()
-    sys.exit(app.exec())

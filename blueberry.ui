@@ -359,7 +359,7 @@ color: #1E90FF;</string>
         </property>
        </widget>
       </item>
-      <item alignment="Qt::AlignmentFlag::AlignRight">
+      <item alignment="Qt::AlignRight">
        <widget class="QGraphicsView" name="graphicsView">
         <property name="minimumSize">
          <size>
@@ -372,6 +372,9 @@ color: #1E90FF;</string>
           <width>300</width>
           <height>300</height>
          </size>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignBottom|Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing</set>
         </property>
        </widget>
       </item>

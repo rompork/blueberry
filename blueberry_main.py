@@ -1,19 +1,20 @@
 import os
 import sys
 import random
+import mutagen
 from PyQt6 import QtWidgets
 from PyQt6.QtWidgets import (
     QApplication, QWidget, QFileDialog, QMainWindow,
     QLabel, QPushButton, QListWidget, QHBoxLayout, QVBoxLayout, QSlider)
 from PyQt6.QtCore import QtMsgType, Qt, QTimer
-from PyQt6.QtGui import QPixmap, QIcon, QFont, QFontMetrics
-from PySide6.QtCore import QUrl, QTime
-from PySide6.QtMultimedia import QMediaPlayer, QAudioOutput, QAudioFormat
+from PyQt6.QtGui import QPixmap, QIcon, QFont, QFontMetrics, QImage
+from PyQt6.QtCore import QUrl, QTime, QByteArray
+from PyQt6.QtMultimedia import QMediaPlayer, QAudioOutput, QAudioFormat
 from plyer import notification
 from random import randint
 
 from blueberry_ui import *
-from themes import light_theme, dark_theme, classic_theme, lavander_theme_dark, lavander_theme_light, orange_theme_dark, orange_theme_light, green_theme_dark, green_theme_light, red_theme_dark, red_theme_light, blue_theme_dark, blue_theme_light, cyan_theme_dark, cyan_theme_light, lime_theme_dark, lime_theme_light
+from themes import light_theme, dark_theme ,classic_theme, lavander_theme_dark, lavander_theme_light, orange_theme_dark, orange_theme_light, green_theme_dark, green_theme_light, red_theme_dark, red_theme_light, blue_theme_dark, blue_theme_light, cyan_theme_dark, cyan_theme_light, lime_theme_dark, lime_theme_light
 
 class Widget(QMainWindow):
     def __init__(self):
@@ -31,6 +32,9 @@ class Widget(QMainWindow):
         self.audio_files = []
         self.current_theme = classic_theme
         self.setStyleSheet(self.current_theme)
+        self.scene = QtWidgets.QGraphicsScene()
+        self.ui.graphicsView.setScene(self.scene)
+        self.ui.graphicsView.hide() 
 
         self.player = QMediaPlayer()
         self.audio = QAudioOutput()
@@ -83,6 +87,7 @@ class Widget(QMainWindow):
             self.player.setSource(QUrl.fromLocalFile(self.file))
             self.ui.label.setText(os.path.basename(self.file))
             self.adjustLabelFontSize(self.ui.label)
+            self.updateSongIcon(self.file)
             self.Play()
             self.sendNotification(os.path.basename(self.file))
 
@@ -115,6 +120,7 @@ class Widget(QMainWindow):
         self.player.setSource(QUrl.fromLocalFile(selected_file))
         self.ui.label.setText(item.text())
         self.adjustLabelFontSize(self.ui.label)
+        self.updateSongIcon(selected_file)
         self.Play()
         self.sendNotification(item.text())
 
@@ -142,6 +148,7 @@ class Widget(QMainWindow):
         self.ui.label.setText("No file selected")
         self.adjustLabelFontSize(self.ui.label)
         self.ui.music_live_time.setText("00:00 / 00:00")
+        self.ui.graphicsView.hide()
 
     def Repeat(self):
         print("repeat")
@@ -163,7 +170,7 @@ class Widget(QMainWindow):
             print("No audio files to shuffle")
 
     def handleMediaStatusChanged(self, status):
-        if status == QMediaPlayer.EndOfMedia:
+        if status == QMediaPlayer.MediaStatus.EndOfMedia:
             if self.repeat_m:
                 print("repeating the file")
                 self.player.setPosition(0)
@@ -207,6 +214,7 @@ class Widget(QMainWindow):
             self.player.setSource(QUrl.fromLocalFile(next_file))
             self.ui.label.setText(os.path.basename(next_file))
             self.adjustLabelFontSize(self.ui.label)
+            self.updateSongIcon(next_file)
             self.Play()
             self.sendNotification(os.path.basename(next_file))
         else:
@@ -224,6 +232,7 @@ class Widget(QMainWindow):
             self.player.setSource(QUrl.fromLocalFile(prev_file))
             self.ui.label.setText(os.path.basename(prev_file))
             self.adjustLabelFontSize(self.ui.label)
+            self.updateSongIcon(prev_file)
             self.Play()
             self.sendNotification(os.path.basename(prev_file))
         else:
@@ -293,6 +302,93 @@ class Widget(QMainWindow):
                     elif theme == "Lime":
                         self.setStyleSheet(lime_theme_light if mode == "Light" else lime_theme_dark)
                         self.current_theme = "lime"
+    def updateSongIcon(self, file_path):
+        try:
+            from mutagen import File
+            from mutagen.id3 import ID3
+        
+            audio = File(file_path)
+            if audio is None:
+                self.ui.graphicsView.hide()
+                return
+            
+        # Handle MP3 files
+            if isinstance(audio, mutagen.mp3.MP3):
+                if audio.tags is None:
+                    self.ui.graphicsView.hide()
+                    return
+                
+                for tag in audio.tags.values():
+                    if tag.FrameID == 'APIC':  # Look for embedded album art
+                        img_data = tag.data
+                        qimg = QImage.fromData(QByteArray(img_data))
+                        pixmap = QPixmap.fromImage(qimg)
+                    
+                    # Get the size of the graphics view
+                        view_size = self.ui.graphicsView.size()
+                    
+                    # Scale scene to match graphics view size
+                        self.scene.setSceneRect(0, 0, view_size.width(), view_size.height())
+                    
+                    # Scale pixmap to fill the entire view
+                        scaled_pixmap = pixmap.scaled(
+                        view_size,
+                        Qt.AspectRatioMode.KeepAspectRatio,
+                        Qt.TransformationMode.SmoothTransformation
+                    )
+                    
+                    # Calculate position to center the pixmap
+                        x = (view_size.width() - scaled_pixmap.width()) / 2
+                        y = (view_size.height() - scaled_pixmap.height()) / 2
+                    
+                        self.scene.clear()
+                        self.scene.addPixmap(scaled_pixmap).setPos(x, y)
+                    
+                    # Set the view to fit scene contents
+                        self.ui.graphicsView.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+                        self.ui.graphicsView.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+                        self.ui.graphicsView.show()
+                        return
+                    
+        # Handle FLAC files
+            elif isinstance(audio, mutagen.flac.FLAC):
+                if audio.pictures:
+                    img_data = audio.pictures[0].data
+                    qimg = QImage.fromData(QByteArray(img_data))
+                    pixmap = QPixmap.fromImage(qimg)
+                
+                # Get the size of the graphics view
+                    view_size = self.ui.graphicsView.size()
+                
+                # Scale scene to match graphics view size
+                    self.scene.setSceneRect(0, 0, view_size.width(), view_size.height())
+                
+                # Scale pixmap to fill the entire view
+                    scaled_pixmap = pixmap.scaled(
+                    view_size,
+                    Qt.AspectRatioMode.KeepAspectRatio,
+                    Qt.TransformationMode.SmoothTransformation
+                )
+                
+                # Calculate position to center the pixmap
+                    x = (view_size.width() - scaled_pixmap.width()) / 2
+                    y = (view_size.height() - scaled_pixmap.height()) / 2
+                
+                    self.scene.clear()
+                    self.scene.addPixmap(scaled_pixmap).setPos(x, y)
+                
+                # Set the view to fit scene contents
+                    self.ui.graphicsView.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+                    self.ui.graphicsView.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+                    self.ui.graphicsView.show()
+                    return
+        
+        # If no album art was found
+            self.ui.graphicsView.hide()
+        
+        except Exception as e:
+            print(f"Error loading album art: {e}")
+            self.ui.graphicsView.hide()
 app = QApplication([])
 bl = Widget()
 bl.show()
