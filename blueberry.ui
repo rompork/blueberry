@@ -32,7 +32,7 @@
   </property>
   <property name="windowIcon">
    <iconset resource="res.qrc">
-    <normaloff>:/newPrefix/arrow_right.png</normaloff>:/newPrefix/arrow_right.png</iconset>
+    <normaloff>:/icons/arrow_right.png</normaloff>:/icons/arrow_right.png</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: #000000;
@@ -154,7 +154,7 @@ color: #1E90FF;</string>
         </property>
         <property name="icon">
          <iconset resource="res.qrc">
-          <normaloff>:/newPrefix/arrow_left.png</normaloff>:/newPrefix/arrow_left.png</iconset>
+          <normaloff>:/icons/arrow_left.png</normaloff>:/icons/arrow_left.png</iconset>
         </property>
        </widget>
       </item>
@@ -177,7 +177,7 @@ color: #1E90FF;</string>
         </property>
         <property name="icon">
          <iconset resource="res.qrc">
-          <normaloff>:/newPrefix/play.png</normaloff>:/newPrefix/play.png</iconset>
+          <normaloff>:/icons/play.png</normaloff>:/icons/play.png</iconset>
         </property>
        </widget>
       </item>
@@ -200,7 +200,7 @@ color: #1E90FF;</string>
         </property>
         <property name="icon">
          <iconset resource="res.qrc">
-          <normaloff>:/newPrefix/pause.png</normaloff>:/newPrefix/pause.png</iconset>
+          <normaloff>:/icons/pause.png</normaloff>:/icons/pause.png</iconset>
         </property>
        </widget>
       </item>
@@ -223,7 +223,7 @@ color: #1E90FF;</string>
         </property>
         <property name="icon">
          <iconset resource="res.qrc">
-          <normaloff>:/newPrefix/arrow_right.png</normaloff>:/newPrefix/arrow_right.png</iconset>
+          <normaloff>:/icons/arrow_right.png</normaloff>:/icons/arrow_right.png</iconset>
         </property>
        </widget>
       </item>
@@ -246,7 +246,7 @@ color: #1E90FF;</string>
         </property>
         <property name="icon">
          <iconset resource="res.qrc">
-          <normaloff>:/newPrefix/stop.png</normaloff>:/newPrefix/stop.png</iconset>
+          <normaloff>:/icons/stop.png</normaloff>:/icons/stop.png</iconset>
         </property>
        </widget>
       </item>
@@ -323,7 +323,7 @@ color: #1E90FF;</string>
         </property>
         <property name="icon">
          <iconset resource="res.qrc">
-          <normaloff>:/newPrefix/repeat.png</normaloff>:/newPrefix/repeat.png</iconset>
+          <normaloff>:/icons/repeat.png</normaloff>:/icons/repeat.png</iconset>
         </property>
         <property name="checkable">
          <bool>false</bool>
@@ -355,7 +355,7 @@ color: #1E90FF;</string>
         </property>
         <property name="icon">
          <iconset resource="res.qrc">
-          <normaloff>:/newPrefix/shuffle.png</normaloff>:/newPrefix/shuffle.png</iconset>
+          <normaloff>:/icons/shuffle.png</normaloff>:/icons/shuffle.png</iconset>
         </property>
        </widget>
       </item>

@@ -22,8 +22,8 @@ class Ui_Blueberry(object):
         font = QtGui.QFont()
         font.setItalic(False)
         Blueberry.setFont(font)
-        icon = QtGui.QIcon("arrow_right.png")
-        icon.addPixmap(QtGui.QPixmap(":/newPrefix/arrow_right.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(":/icons/arrow_right.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         Blueberry.setWindowIcon(icon)
 #        Blueberry.setStyleSheet("background-color: #000000;\n"
 #"border: 1px solid #000000;\n"
@@ -79,8 +79,8 @@ class Ui_Blueberry(object):
 #"border-radius: 4px;\n"
 #"color: #1E90FF;")
         self.arrow_left.setText("")
-        icon1 = QtGui.QIcon("arrow_left.png")
-        icon1.addPixmap(QtGui.QPixmap(":/newPrefix/arrow_left.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon1 = QtGui.QIcon()
+        icon1.addPixmap(QtGui.QPixmap(":/icons/arrow_left.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.arrow_left.setIcon(icon1)
         self.arrow_left.setObjectName("arrow_left")
         self.horizontalLayout.addWidget(self.arrow_left)
@@ -91,8 +91,8 @@ class Ui_Blueberry(object):
 #"border-radius: 4px;\n"
 #"color: #1E90FF;")
         self.play.setText("")
-        icon2 = QtGui.QIcon("play.png")
-        icon2.addPixmap(QtGui.QPixmap(":/newPrefix/play.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon2 = QtGui.QIcon()
+        icon2.addPixmap(QtGui.QPixmap(":/icons/play.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.play.setIcon(icon2)
         self.play.setObjectName("play")
         self.horizontalLayout.addWidget(self.play)
@@ -103,8 +103,8 @@ class Ui_Blueberry(object):
 #"border-radius: 4px;\n"
 #"color: #1E90FF;")
         self.pause.setText("")
-        icon3 = QtGui.QIcon("pause.png")
-        icon3.addPixmap(QtGui.QPixmap(":/newPrefix/pause.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon3 = QtGui.QIcon()
+        icon3.addPixmap(QtGui.QPixmap(":/icons/pause.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.pause.setIcon(icon3)
         self.pause.setObjectName("pause")
         self.horizontalLayout.addWidget(self.pause)
@@ -125,8 +125,8 @@ class Ui_Blueberry(object):
 #"border-radius: 4px;\n"
 #"color: #1E90FF;")
         self.stop.setText("")
-        icon4 = QtGui.QIcon("stop.png")
-        icon4.addPixmap(QtGui.QPixmap(":/newPrefix/stop.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon4 = QtGui.QIcon()
+        icon4.addPixmap(QtGui.QPixmap(":/icons/stop.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.stop.setIcon(icon4)
         self.stop.setObjectName("stop")
         self.horizontalLayout.addWidget(self.stop)
@@ -163,8 +163,8 @@ class Ui_Blueberry(object):
 #"border: 1px solid #000000;\n"
 #"border-radius: 4px;\n"
 #"color: #1E90FF;")
-        icon5 = QtGui.QIcon("repeat.png")
-        icon5.addPixmap(QtGui.QPixmap(":/newPrefix/repeat.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon5 = QtGui.QIcon()
+        icon5.addPixmap(QtGui.QPixmap(":/icons/repeat.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.repeat.setIcon(icon5)
         self.repeat.setCheckable(False)
         self.repeat.setObjectName("repeat")
@@ -176,14 +176,14 @@ class Ui_Blueberry(object):
 #"border: 1px solid #000000;\n"
 #"border-radius: 4px;\n"
 #"color: #1E90FF;")
-        icon6 = QtGui.QIcon("shuffle.png")
-        icon6.addPixmap(QtGui.QPixmap(":/newPrefix/shuffle.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon6 = QtGui.QIcon()
+        icon6.addPixmap(QtGui.QPixmap(":/icons/shuffle.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.shuffle.setIcon(icon6)
         self.shuffle.setObjectName("shuffle")
         self.verticalLayout.addWidget(self.shuffle)
         self.graphicsView = QtWidgets.QGraphicsView(parent=self.centralwidget)
-        self.graphicsView.setMinimumSize(QtCore.QSize(200, 200))
-        self.graphicsView.setMaximumSize(QtCore.QSize(200, 200))
+        self.graphicsView.setMinimumSize(QtCore.QSize(200, 0))
+        self.graphicsView.setMaximumSize(QtCore.QSize(300, 300))
         self.graphicsView.setAlignment(QtCore.Qt.AlignmentFlag.AlignBottom|QtCore.Qt.AlignmentFlag.AlignRight|QtCore.Qt.AlignmentFlag.AlignTrailing)
         self.graphicsView.setObjectName("graphicsView")
         self.verticalLayout.addWidget(self.graphicsView, 0, QtCore.Qt.AlignmentFlag.AlignRight)

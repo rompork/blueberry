@@ -1,12 +1,12 @@
 <RCC>
-  <qresource prefix="newPrefix">
-    <file>arrow_left.png</file>
-    <file>arrow_right.png</file>
-    <file>blueberry.png</file>
-    <file>stop.png</file>
-    <file>repeat.png</file>
-    <file>shuffle.png</file>
-    <file>pause.png</file>
-    <file>play.png</file>
+  <qresource>
+    <file>icons/arrow_left.png</file>
+    <file>icons/arrow_right.png</file>
+    <file>icons/blueberry.png</file>
+    <file>icons/stop.png</file>
+    <file>icons/repeat.png</file>
+    <file>icons/shuffle.png</file>
+    <file>icons/pause.png</file>
+    <file>icons/play.png</file>
   </qresource>
 </RCC>

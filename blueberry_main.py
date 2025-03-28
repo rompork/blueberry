@@ -2,15 +2,13 @@ import os
 import sys
 import random
 import mutagen
+import res_rc
 from PyQt6 import QtWidgets
-from PyQt6.QtWidgets import (
-    QApplication, QWidget, QFileDialog, QMainWindow,
-    QLabel, QPushButton, QListWidget, QHBoxLayout, QVBoxLayout, QSlider)
+from PyQt6.QtWidgets import QApplication, QWidget, QFileDialog, QMainWindow, QLabel, QPushButton, QListWidget, QHBoxLayout, QVBoxLayout, QSlider, QSystemTrayIcon
 from PyQt6.QtCore import QtMsgType, Qt, QTimer
 from PyQt6.QtGui import QPixmap, QIcon, QFont, QFontMetrics, QImage
 from PyQt6.QtCore import QUrl, QTime, QByteArray
 from PyQt6.QtMultimedia import QMediaPlayer, QAudioOutput, QAudioFormat
-from plyer import notification
 from random import randint
 
 from blueberry_ui import *
@@ -22,7 +20,7 @@ class Widget(QMainWindow):
         self.ui = Ui_Blueberry()
         self.ui.setupUi(self)
         self.setWindowTitle('Blueberry')
-        self.setWindowIcon(QIcon("/home/rompork/Documents/python/blueberry/blueberry.png"))
+        self.setWindowIcon(QIcon(":/icons/blueberry.png"))
 
         self.file = ''
         self.dir = ''
@@ -257,12 +255,16 @@ class Widget(QMainWindow):
         label.setText(elided_text)
 
     def sendNotification(self, song_name):
-        notification.notify(
-            title='Now Playing',
-            message=song_name,
-            app_name='Blueberry',
-            timeout=5
-        )
+        try:
+            if not hasattr(self, 'tray_icon'):
+                self.tray_icon = QSystemTrayIcon(self)
+                self.tray_icon.setIcon(QIcon(":/icons/blueberry.png"))
+                self.tray_icon.show()
+        
+            self.tray_icon.showMessage("Now Playing", song_name, QSystemTrayIcon.MessageIcon.Information, 3000)
+        except Exception as e:
+            print(f"Notification error: {e}")
+            pass
     def changeThemes(self):
         themes = ["Light", "Dark", "Classic", "Lavander", "Orange", "Green", "Red", "Blue", "Cyan", "Lime"]
         theme, ok = QtWidgets.QInputDialog.getItem(self, "Select Theme", "Available Themes:", themes, 0, False)
@@ -306,89 +308,51 @@ class Widget(QMainWindow):
         try:
             from mutagen import File
             from mutagen.id3 import ID3
-        
             audio = File(file_path)
             if audio is None:
                 self.ui.graphicsView.hide()
                 return
-            
-        # Handle MP3 files
             if isinstance(audio, mutagen.mp3.MP3):
                 if audio.tags is None:
                     self.ui.graphicsView.hide()
                     return
-                
                 for tag in audio.tags.values():
-                    if tag.FrameID == 'APIC':  # Look for embedded album art
+                    if tag.FrameID == 'APIC':
                         img_data = tag.data
                         qimg = QImage.fromData(QByteArray(img_data))
                         pixmap = QPixmap.fromImage(qimg)
-                    
-                    # Get the size of the graphics view
                         view_size = self.ui.graphicsView.size()
-                    
-                    # Scale scene to match graphics view size
                         self.scene.setSceneRect(0, 0, view_size.width(), view_size.height())
-                    
-                    # Scale pixmap to fill the entire view
-                        scaled_pixmap = pixmap.scaled(
-                        view_size,
-                        Qt.AspectRatioMode.KeepAspectRatio,
-                        Qt.TransformationMode.SmoothTransformation
-                    )
-                    
-                    # Calculate position to center the pixmap
+                        scaled_pixmap = pixmap.scaled(view_size, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation) 
                         x = (view_size.width() - scaled_pixmap.width()) / 2
-                        y = (view_size.height() - scaled_pixmap.height()) / 2
-                    
+                        y = (view_size.height() - scaled_pixmap.height()) / 2 
                         self.scene.clear()
                         self.scene.addPixmap(scaled_pixmap).setPos(x, y)
-                    
-                    # Set the view to fit scene contents
                         self.ui.graphicsView.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
                         self.ui.graphicsView.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
                         self.ui.graphicsView.show()
                         return
-                    
-        # Handle FLAC files
             elif isinstance(audio, mutagen.flac.FLAC):
                 if audio.pictures:
                     img_data = audio.pictures[0].data
                     qimg = QImage.fromData(QByteArray(img_data))
                     pixmap = QPixmap.fromImage(qimg)
-                
-                # Get the size of the graphics view
                     view_size = self.ui.graphicsView.size()
-                
-                # Scale scene to match graphics view size
                     self.scene.setSceneRect(0, 0, view_size.width(), view_size.height())
-                
-                # Scale pixmap to fill the entire view
-                    scaled_pixmap = pixmap.scaled(
-                    view_size,
-                    Qt.AspectRatioMode.KeepAspectRatio,
-                    Qt.TransformationMode.SmoothTransformation
-                )
-                
-                # Calculate position to center the pixmap
+                    scaled_pixmap = pixmap.scaled(view_size, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation)
                     x = (view_size.width() - scaled_pixmap.width()) / 2
                     y = (view_size.height() - scaled_pixmap.height()) / 2
-                
                     self.scene.clear()
                     self.scene.addPixmap(scaled_pixmap).setPos(x, y)
-                
-                # Set the view to fit scene contents
                     self.ui.graphicsView.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
                     self.ui.graphicsView.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
                     self.ui.graphicsView.show()
                     return
-        
-        # If no album art was found
             self.ui.graphicsView.hide()
-        
         except Exception as e:
-            print(f"Error loading album art: {e}")
+            print(f"Unable to load the icon of the music, try again: {e}")
             self.ui.graphicsView.hide()
+
 app = QApplication([])
 bl = Widget()
 bl.show()
