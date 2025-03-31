@@ -35,15 +35,103 @@
     <normaloff>:/icons/arrow_right.png</normaloff>:/icons/arrow_right.png</iconset>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: #000000;
-border: 1px solid #000000;
-border-radius: 4px;
-color: #0000FF;</string>
+   <string notr="true"/>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QFormLayout" name="formLayout">
-    <item row="0" column="0" colspan="2">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="2" column="0" colspan="3">
+     <widget class="QWidget" name="widget_2" native="true">
+      <property name="minimumSize">
+       <size>
+        <width>720</width>
+        <height>35</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>720</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <widget class="QLabel" name="label">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>-10</y>
+         <width>720</width>
+         <height>50</height>
+        </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>250</width>
+         <height>50</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>720</width>
+         <height>30</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>40</pointsize>
+         <italic>false</italic>
+        </font>
+       </property>
+       <property name="text">
+        <string>TextLabel</string>
+       </property>
+      </widget>
+     </widget>
+    </item>
+    <item row="0" column="0" colspan="3">
      <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QWidget" name="widget_3" native="true">
+        <layout class="QVBoxLayout" name="verticalLayout_2">
+         <item>
+          <widget class="QLabel" name="version_label">
+           <property name="text">
+            <string>V1.5</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="help">
+           <property name="minimumSize">
+            <size>
+             <width>30</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="baseSize">
+            <size>
+             <width>30</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Help</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
       <item>
        <widget class="QToolButton" name="files">
         <property name="minimumSize">
@@ -62,10 +150,7 @@ color: #0000FF;</string>
          <bool>false</bool>
         </property>
         <property name="styleSheet">
-         <string notr="true">background-color: #00008B;
-border: 1px solid #000000;
-border-radius: 4px;
-color: #1E90FF;</string>
+         <string notr="true"/>
         </property>
         <property name="text">
          <string>Files</string>
@@ -89,14 +174,17 @@ color: #1E90FF;</string>
         <property name="maximumSize">
          <size>
           <width>100</width>
-          <height>50</height>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="baseSize">
+         <size>
+          <width>50</width>
+          <height>0</height>
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true">background-color: #00008B;
-border: 1px solid #000000;
-border-radius: 4px;
-color: #1E90FF;</string>
+         <string notr="true"/>
         </property>
         <property name="text">
          <string>Playlists</string>
@@ -112,13 +200,23 @@ color: #1E90FF;</string>
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true">background-color: #00008B;
-border: 1px solid #000000;
-border-radius: 4px;
-color: #1E90FF;</string>
+         <string notr="true"/>
         </property>
         <property name="text">
          <string>Themes</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QToolButton" name="fonts">
+        <property name="minimumSize">
+         <size>
+          <width>30</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Fonts</string>
         </property>
        </widget>
       </item>
@@ -144,10 +242,7 @@ color: #1E90FF;</string>
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true">background-color: #00008B;
-border: 1px solid #000000;
-border-radius: 4px;
-color: #1E90FF;</string>
+         <string notr="true"/>
         </property>
         <property name="text">
          <string/>
@@ -167,10 +262,7 @@ color: #1E90FF;</string>
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true">background-color: #00008B;
-border: 1px solid #000000;
-border-radius: 4px;
-color: #1E90FF;</string>
+         <string notr="true"/>
         </property>
         <property name="text">
          <string/>
@@ -190,10 +282,7 @@ color: #1E90FF;</string>
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true">background-color: #00008B;
-border: 1px solid #000000;
-border-radius: 4px;
-color: #1E90FF;</string>
+         <string notr="true"/>
         </property>
         <property name="text">
          <string/>
@@ -213,10 +302,7 @@ color: #1E90FF;</string>
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true">background-color: #00008B;
-border: 1px solid #000000;
-border-radius: 4px;
-color: #1E90FF;</string>
+         <string notr="true"/>
         </property>
         <property name="text">
          <string/>
@@ -236,10 +322,7 @@ color: #1E90FF;</string>
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true">background-color: #00008B;
-border: 1px solid #000000;
-border-radius: 4px;
-color: #1E90FF;</string>
+         <string notr="true"/>
         </property>
         <property name="text">
          <string/>
@@ -253,10 +336,7 @@ color: #1E90FF;</string>
       <item>
        <widget class="QSlider" name="Slider">
         <property name="styleSheet">
-         <string notr="true">background-color: #00008B;
-border: 1px solid #000000;
-border-radius: 4px;
-color: #1E90FF;</string>
+         <string notr="true"/>
         </property>
         <property name="sliderPosition">
          <number>70</number>
@@ -268,35 +348,79 @@ color: #1E90FF;</string>
       </item>
      </layout>
     </item>
-    <item row="1" column="0">
-     <widget class="QListWidget" name="listWidget">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>200</width>
-        <height>300</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>600</width>
-        <height>700</height>
-       </size>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">background-color: #00008B;
-border: 1px solid #000000;
-border-radius: 4px;
-color: #FFFFFF;</string>
-      </property>
+    <item row="3" column="0" rowspan="2" colspan="3">
+     <widget class="QWidget" name="widget" native="true">
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <widget class="QLabel" name="music_live_time">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>20</width>
+           <height>10</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>160</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
+         <property name="text">
+          <string>00:00</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Orientation::Horizontal</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Policy::Fixed</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QSlider" name="progressSlider">
+         <property name="minimumSize">
+          <size>
+           <width>500</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>600</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Orientation::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </item>
-    <item row="1" column="1">
+    <item row="1" column="2">
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
        <widget class="QPushButton" name="repeat">
@@ -313,10 +437,7 @@ color: #FFFFFF;</string>
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true">background-color: #00008B;
-border: 1px solid #000000;
-border-radius: 4px;
-color: #1E90FF;</string>
+         <string notr="true"/>
         </property>
         <property name="text">
          <string>Repeat</string>
@@ -345,10 +466,7 @@ color: #1E90FF;</string>
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true">background-color: #00008B;
-border: 1px solid #000000;
-border-radius: 4px;
-color: #1E90FF;</string>
+         <string notr="true"/>
         </property>
         <property name="text">
          <string>Shuffle</string>
@@ -374,14 +492,14 @@ color: #1E90FF;</string>
          </size>
         </property>
         <property name="alignment">
-         <set>Qt::AlignmentFlag::AlignBottom|Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing</set>
+          <set>Qt::AlignBottom|Qt::AlignRight|Qt::AlignTrailing</set>
         </property>
        </widget>
       </item>
      </layout>
     </item>
-    <item row="2" column="0" colspan="2">
-     <widget class="QLabel" name="label">
+    <item row="1" column="0" colspan="2">
+     <widget class="QListWidget" name="listWidget">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
         <horstretch>0</horstretch>
@@ -390,86 +508,19 @@ color: #1E90FF;</string>
       </property>
       <property name="minimumSize">
        <size>
-        <width>250</width>
-        <height>50</height>
+        <width>300</width>
+        <height>200</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>720</width>
-        <height>30</height>
+        <width>350</width>
+        <height>400</height>
        </size>
       </property>
-      <property name="font">
-       <font>
-        <pointsize>40</pointsize>
-       </font>
+      <property name="styleSheet">
+       <string notr="true"/>
       </property>
-      <property name="text">
-       <string>TextLabel</string>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="0" colspan="2">
-     <widget class="QWidget" name="widget" native="true">
-      <layout class="QHBoxLayout" name="horizontalLayout_2">
-       <item>
-        <widget class="QLabel" name="music_live_time">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>20</width>
-           <height>10</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>90</width>
-           <height>20</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">background-color: #00008B;
-border: 1px solid #000000;
-border-radius: 4px;
-color: #1E90FF;</string>
-         </property>
-         <property name="text">
-          <string>00:00</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QSlider" name="progressSlider">
-         <property name="minimumSize">
-          <size>
-           <width>500</width>
-           <height>20</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>600</width>
-           <height>30</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">background-color: #00008B;
-border: 1px solid #000000;
-border-radius: 4px;
-color: #1E90FF;</string>
-         </property>
-         <property name="orientation">
-          <enum>Qt::Orientation::Horizontal</enum>
-         </property>
-        </widget>
-       </item>
-      </layout>
      </widget>
     </item>
    </layout>
@@ -480,7 +531,7 @@ color: #1E90FF;</string>
      <x>0</x>
      <y>0</y>
      <width>754</width>
-     <height>22</height>
+     <height>20</height>
     </rect>
    </property>
   </widget>
