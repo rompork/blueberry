@@ -8,5 +8,9 @@
     <file>icons/shuffle.png</file>
     <file>icons/pause.png</file>
     <file>icons/play.png</file>
+    <file>icons/repeat_on.png</file>
+    <file>icons/repeat_off.png</file>
+    <file>icons/shuffle_on.png</file>
+    <file>icons/shuffle_off.png</file>
   </qresource>
 </RCC>

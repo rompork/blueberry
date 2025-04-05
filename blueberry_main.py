@@ -3,6 +3,7 @@ import sys
 import random
 import mutagen
 import res_rc
+import platform
 from settings import Settings
 from PyQt6 import QtWidgets
 from PyQt6.QtWidgets import QApplication, QWidget, QFileDialog, QMainWindow, QLabel, QPushButton, QListWidget, QHBoxLayout, QVBoxLayout, QSlider, QSystemTrayIcon
@@ -15,14 +16,37 @@ from random import randint
 from blueberry_ui import *
 from themes import light_theme, dark_theme ,classic_theme, lavander_theme_dark, lavander_theme_light, orange_theme_dark, orange_theme_light, green_theme_dark, green_theme_light, red_theme_dark, red_theme_light, blue_theme_dark, blue_theme_light, cyan_theme_dark, cyan_theme_light, lime_theme_dark, lime_theme_light
 
+if os.name == 'nt':
+    import ctypes
+    try:
+        ctypes.windll.shcore.SetProcessDpiAwareness(1)
+    except:
+        pass
+
 FONTS = {
-    'Default': 'Arial',
-    'Modern': 'Roboto',
-    'Classic': 'Times New Roman',
-    'Elegant': 'Georgia',
-    'Monospace': 'Courier New',
-    'Clean': 'Helvetica',
-    'Professional': 'Calibri'}
+    'Segoe UI': 'Segoe UI', 
+    'Arial': 'Arial',
+    'Times New Roman': 'Times New Roman',
+    'Courier New': 'Courier New',
+    'Verdana': 'Verdana',
+    'Tahoma': 'Tahoma',
+    'Microsoft Sans Serif': 'Microsoft Sans Serif'
+} if os.name == 'nt' else {
+    'Roboto': 'Roboto',
+    'Georgia': 'Georgia',
+    'Helvetica': 'Helvetica',
+    'Carlito': 'Carlito',
+    'Verdana': 'Verdana', 
+    'Z003': 'Z003',
+    'P052': 'P052',
+    'C059': 'C059',
+    'D050000L': 'D050000L',
+    'Ubuntu': 'Ubuntu',
+    'DejaVu Sans': 'DejaVu Sans',
+    'Webdings': 'Webdings',
+    'Unidings': 'Unidings',
+    'Analecta': 'Analecta'
+}
 
 class Widget(QMainWindow):
     def __init__(self):
@@ -47,6 +71,7 @@ class Widget(QMainWindow):
 
         self.player = QMediaPlayer()
         self.audio = QAudioOutput()
+        self.settings = Settings()
         self.player.setAudioOutput(self.audio)
         self.audioVolumeLevel = 70
 
@@ -63,9 +88,8 @@ class Widget(QMainWindow):
         self.ui.progressSlider.sliderReleased.connect(self.FinalizeMusicPosition)
         self.ui.listWidget.itemDoubleClicked.connect(self.PlaySelectedFile)
         self.ui.shuffle.clicked.connect(self.Shuffle)
-        self.ui.themes.clicked.connect(self.changeThemes)
-        self.ui.fonts.clicked.connect(self.changeFonts)
         self.ui.help.clicked.connect(self.showHelp)
+        self.ui.settings.clicked.connect(self.UserSettings)
 
         self.player.mediaStatusChanged.connect(self.handleMediaStatusChanged)
         self.player.positionChanged.connect(self.updateSliderPosition)
@@ -73,28 +97,22 @@ class Widget(QMainWindow):
         self.ui.label.setText("No file selected")
         self.ui.music_live_time.setText("00:00 / 00:00")
 
-        self.shortcut_next = QtGui.QShortcut(QtGui.QKeySequence("Ctrl+Right"), self)
+        shortcuts = self.settings.settings['shortcuts']
+        self.shortcut_next = QtGui.QShortcut(QtGui.QKeySequence(shortcuts['next']), self)
         self.shortcut_next.activated.connect(self.Next)
-    
-        self.shortcut_prev = QtGui.QShortcut(QtGui.QKeySequence("Ctrl+Left"), self)
+        self.shortcut_prev = QtGui.QShortcut(QtGui.QKeySequence(shortcuts['previous']), self)
         self.shortcut_prev.activated.connect(self.Previous)
-    
-        self.shortcut_play = QtGui.QShortcut(QtGui.QKeySequence("Space"), self)
+        self.shortcut_play = QtGui.QShortcut(QtGui.QKeySequence(shortcuts['play_pause']), self)
         self.shortcut_play.activated.connect(self.PlayPause)
-    
-        self.shortcut_stop = QtGui.QShortcut(QtGui.QKeySequence("Ctrl+S"), self)
+        self.shortcut_stop = QtGui.QShortcut(QtGui.QKeySequence(shortcuts['stop']), self)
         self.shortcut_stop.activated.connect(self.Stop)
-    
-        self.shortcut_vol_up = QtGui.QShortcut(QtGui.QKeySequence("Ctrl+Up"), self)
+        self.shortcut_vol_up = QtGui.QShortcut(QtGui.QKeySequence(shortcuts['volume_up']), self)
         self.shortcut_vol_up.activated.connect(self.VolumeUp)
-    
-        self.shortcut_vol_down = QtGui.QShortcut(QtGui.QKeySequence("Ctrl+Down"), self)
+        self.shortcut_vol_down = QtGui.QShortcut(QtGui.QKeySequence(shortcuts['volume_down']), self)
         self.shortcut_vol_down.activated.connect(self.VolumeDown)
-    
-        self.shortcut_mute = QtGui.QShortcut(QtGui.QKeySequence("Ctrl+M"), self)
+        self.shortcut_mute = QtGui.QShortcut(QtGui.QKeySequence(shortcuts['mute']), self)
         self.shortcut_mute.activated.connect(self.ToggleMute)
 
-        self.settings = Settings()
         self.current_theme = self.settings.settings['last_theme']
         self.setStyleSheet(self.get_theme_stylesheet(self.current_theme))
         if self.settings.settings['last_directory']:
@@ -120,7 +138,11 @@ class Widget(QMainWindow):
             self.ui.music_live_time.setFont(font_obj)
             self.ui.version_label.setFont(font_obj)
             self.ui.listWidget.setFont(font_obj)
-
+        if os.name == 'nt':
+            if hasattr(QtCore.Qt, 'AA_EnableHighDpiScaling'):
+                QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling, True)
+            if hasattr(QtCore.Qt, 'AA_UseHighDpiPixmaps'):
+                QApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True)
 
     def filter(self, files, extensions):
         result = []
@@ -409,31 +431,6 @@ class Widget(QMainWindow):
         except Exception as e:
             print(f"Notification error: {e}")
             pass
-    def changeThemes(self):
-        themes = ["Light", "Dark", "Classic", "Lavander", "Orange", "Green", "Red", "Blue", "Cyan", "Lime"]
-        theme, ok = QtWidgets.QInputDialog.getItem(self, "Select Theme", "Available Themes:", themes, 0, False)
-        if ok:
-            if theme in ["Light", "Dark", "Classic"]:
-                if theme == "Light":
-                    self.setStyleSheet(light_theme)
-                    self.current_theme = "light"
-                elif theme == "Dark":
-                    self.setStyleSheet(dark_theme)
-                    self.current_theme = "dark"
-                elif theme == "Classic":
-                    self.setStyleSheet(classic_theme)
-                    self.current_theme = "classic"
-            else:
-                mode, ok_mode = QtWidgets.QInputDialog.getItem(
-                    self, "Select Mode", "Choose Mode:", ["Light", "Dark"], 0, False)
-                if ok_mode:
-                    theme_lower = theme.lower()
-                    if mode == "Dark":
-                        theme_lower += "_dark"
-                    self.current_theme = theme_lower
-                    self.setStyleSheet(self.get_theme_stylesheet(theme_lower))
-        self.settings.settings['last_theme'] = self.current_theme
-        self.settings.save_settings()
     def get_theme_stylesheet(self, theme_name):
         parts = theme_name.split('_')
         base_theme = parts[0]
@@ -478,23 +475,6 @@ class Widget(QMainWindow):
             return theme_variant['dark' if is_dark else 'light']
 
         return classic_theme
-    def changeFonts(self):
-        fonts = list(FONTS.keys())
-        font, ok = QtWidgets.QInputDialog.getItem(
-            self, "Select Font", "Available Fonts:", fonts, 0, False)
-        if ok:
-            try:
-                selected_font = FONTS[font]
-                font_obj = QFont(selected_font, 12)
-                self.ui.label.setFont(font_obj)
-                self.ui.music_live_time.setFont(font_obj)
-                self.ui.version_label.setFont(font_obj)
-                self.ui.listWidget.setFont(font_obj)
-                self.settings.settings['current_font'] = font
-                self.settings.save_settings()
-                self.adjustLabelFontSize(self.ui.label)
-            except Exception as e:
-                print(f"Error setting font: {e}")
     def highlightCurrentSong(self):
         for i in range(self.ui.listWidget.count()):
             item = self.ui.listWidget.item(i)
@@ -552,21 +532,22 @@ class Widget(QMainWindow):
             print(f"Unable to load the icon, try again: {e}")
             self.ui.graphicsView.hide()
     def showHelp(self):
-        text = """
+        shortcuts = self.settings.settings['shortcuts']
+        text = f"""
         Keyboard Shortcuts:
-    
-        • Space - Play/Pause
-        • Ctrl + Right - Next Song
-        • Ctrl + Left - Previous Song
-        • Ctrl + S - Stop
-        • Ctrl + Up - Volume Up
-        • Ctrl + Down - Volume Down
-        • Ctrl + M - Toggle Mute
-    
+
+        • {shortcuts['play_pause']} - Play/Pause
+        • {shortcuts['next']} - Next Song
+        • {shortcuts['previous']} - Previous Song
+        • {shortcuts['stop']} - Stop
+        • {shortcuts['volume_up']} - Volume Up
+        • {shortcuts['volume_down']} - Volume Down
+        • {shortcuts['mute']} - Toggle Mute
+
         Other Controls:
         • Double click song in list to play them
-        • Use slider in the upper right corner to change the volume (why did i add this)
-        • Use the slider on the bottom to change the postion of the song
+        • Use slider in the upper right corner to change the volume
+        • Use the slider on the bottom to change the position of the song
         """
     
         help_dialog = QtWidgets.QDialog(self)
@@ -590,6 +571,131 @@ class Widget(QMainWindow):
         help_dialog.setLayout(layout)
         help_dialog.exec()
 
+    def updateShortcuts(self):
+        shortcut_map = {
+            'next': (self.shortcut_next, self.Next),
+            'previous': (self.shortcut_prev, self.Previous),
+            'play_pause': (self.shortcut_play, self.PlayPause),
+            'stop': (self.shortcut_stop, self.Stop),
+            'volume_up': (self.shortcut_vol_up, self.VolumeUp),
+            'volume_down': (self.shortcut_vol_down, self.VolumeDown),
+            'mute': (self.shortcut_mute, self.ToggleMute)
+        }
+    
+        for key, (shortcut_obj, func) in shortcut_map.items():
+            new_seq = self.settings.settings['shortcuts'][key]
+            shortcut_obj.setKey(QtGui.QKeySequence(new_seq))
+
+    def UserSettings(self):
+        settings_dialog = QtWidgets.QDialog(self)
+        settings_dialog.setWindowTitle("Settings")
+        settings_dialog.setFixedSize(400, 500)
+        settings_dialog.setStyleSheet(self.current_theme)
+
+        layout = QtWidgets.QVBoxLayout()
+        theme_group = QtWidgets.QGroupBox("Theme Settings")
+        theme_layout = QtWidgets.QVBoxLayout()
+        theme_label = QtWidgets.QLabel("Select Theme:")
+        themes = ["Light", "Dark", "Classic", "Lavander", "Orange", "Green", "Red", "Blue", "Cyan", "Lime"]
+        theme_combo = QtWidgets.QComboBox()
+        theme_combo.addItems(themes)
+        mode_label = QtWidgets.QLabel("Theme Mode:")
+        mode_combo = QtWidgets.QComboBox()
+        mode_combo.addItems(["Light", "Dark"])
+        mode_combo.setEnabled(False)
+        def on_theme_changed(theme):
+            mode_combo.setEnabled(theme not in ["Light", "Dark", "Classic"])
+    
+        theme_combo.currentTextChanged.connect(on_theme_changed)
+        theme_layout.addWidget(theme_label)
+        theme_layout.addWidget(theme_combo)
+        theme_layout.addWidget(mode_label)
+        theme_layout.addWidget(mode_combo)
+        theme_group.setLayout(theme_layout)
+
+        font_group = QtWidgets.QGroupBox("Font Settings")
+        font_layout = QtWidgets.QVBoxLayout()
+        font_label = QtWidgets.QLabel("Select Font:")
+        fonts = list(FONTS.keys())
+        font_combo = QtWidgets.QComboBox()
+        font_combo.addItems(fonts)
+        font_layout.addWidget(font_label)
+        font_layout.addWidget(font_combo)
+        font_group.setLayout(font_layout)
+
+        shortcuts_group = QtWidgets.QGroupBox("Keyboard Shortcuts")
+        shortcuts_layout = QtWidgets.QFormLayout()
+        shortcut_fields = {
+            'next': ('Next Song:', self.settings.settings['shortcuts']['next']),
+            'previous': ('Previous Song:', self.settings.settings['shortcuts']['previous']),
+            'play_pause': ('Play/Pause:', self.settings.settings['shortcuts']['play_pause']),
+            'stop': ('Stop:', self.settings.settings['shortcuts']['stop']),
+            'volume_up': ('Volume Up:', self.settings.settings['shortcuts']['volume_up']),
+            'volume_down': ('Volume Down:', self.settings.settings['shortcuts']['volume_down']),
+            'mute': ('Mute:', self.settings.settings['shortcuts']['mute'])
+        }
+        shortcut_inputs = {}
+        for key, (label, default) in shortcut_fields.items():
+            line_edit = QtWidgets.QLineEdit(default)
+            shortcuts_layout.addRow(label, line_edit)
+            shortcut_inputs[key] = line_edit
+        shortcuts_group.setLayout(shortcuts_layout)
+
+        button_layout = QtWidgets.QHBoxLayout()
+        apply_button = QtWidgets.QPushButton("Apply")
+        close_button = QtWidgets.QPushButton("Close")
+    
+        def apply_settings():
+            selected_theme = theme_combo.currentText()
+            if selected_theme in ["Light", "Dark", "Classic"]:
+                if selected_theme == "Light":
+                    self.setStyleSheet(light_theme)
+                    self.current_theme = "light"
+                elif selected_theme == "Dark":
+                    self.setStyleSheet(dark_theme)
+                    self.current_theme = "dark"
+                elif selected_theme == "Classic":
+                    self.setStyleSheet(classic_theme)
+                    self.current_theme = "classic"
+            else:
+                selected_mode = mode_combo.currentText()
+                theme_lower = selected_theme.lower()
+                if selected_mode == "Dark":
+                    theme_lower += "_dark"
+                self.current_theme = theme_lower
+                self.setStyleSheet(self.get_theme_stylesheet(theme_lower))
+            selected_font = font_combo.currentText()
+            if selected_font in FONTS:
+                font_obj = QFont(FONTS[selected_font], 12)
+                self.ui.label.setFont(font_obj)
+                self.ui.music_live_time.setFont(font_obj)
+                self.ui.version_label.setFont(font_obj)
+                self.ui.listWidget.setFont(font_obj)
+                self.settings.settings['current_font'] = selected_font
+            for key, input_field in shortcut_inputs.items():
+                new_shortcut = input_field.text()
+                try:
+                    QtGui.QKeySequence(new_shortcut)
+                    self.settings.settings['shortcuts'][key] = new_shortcut
+                except:
+                    print(f"Invalid shortcut: {new_shortcut}")
+                    continue
+            self.settings.settings['last_theme'] = self.current_theme
+            self.settings.save_settings()
+            self.updateShortcuts()
+            self.adjustLabelFontSize(self.ui.label)
+            settings_dialog.setStyleSheet(self.current_theme)
+        apply_button.clicked.connect(apply_settings)
+        close_button.clicked.connect(settings_dialog.close) 
+        button_layout.addWidget(apply_button)
+        button_layout.addWidget(close_button)
+        layout.addWidget(theme_group)
+        layout.addWidget(font_group)
+        layout.addWidget(shortcuts_group)
+        layout.addLayout(button_layout)
+    
+        settings_dialog.setLayout(layout)
+        settings_dialog.exec()
 app = QApplication([])
 bl = Widget()
 bl.show()
